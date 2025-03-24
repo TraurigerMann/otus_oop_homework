@@ -6,16 +6,16 @@ class Circle(Figure):
 
     def __init__(self, radius):
         if radius <= 0:
-            raise ValueError("Sides can't be less that 0")
+            raise ValueError("Radius can't be less than 0")
         self.radius = radius
 
     @property
     def area(self):
-        return round(pi * (self.radius ** 2), 5)
+        return pi * (self.radius ** 2)
 
     @property
     def perimeter(self):
-        return round(2 * pi * self.radius, 5)
+        return 2 * pi * self.radius
 
 
 c = Circle(3)

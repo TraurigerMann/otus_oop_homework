@@ -32,7 +32,7 @@ def test_rectangle_perimeter(create_rectangle, sides):
     assert r.perimeter == (side_a + side_b) * 2, f"Expected perimeter {(side_a + side_b) * 2}"
 
 
-#method 'add_area' will show the same behaviour for other figures
+#method "add_area" will show the same behaviour for other figures
 @pytest.mark.parametrize("sides",
                          ["integer",
                           "float"])

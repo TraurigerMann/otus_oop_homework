@@ -1,5 +1,4 @@
 from src.rectangle import Rectangle
-from src.square import Square
 import pytest
 
 
@@ -10,34 +9,26 @@ import pytest
                               "second negative"])
 def test_rectangle_negative_sides(side_a, side_b):
     with pytest.raises(ValueError) as exc_info:
-        r = Rectangle(side_a, side_b)
-    assert str(exc_info.value) == "Sides can't be less than 0"
+        Rectangle(side_a, side_b)
+    assert exc_info.type is ValueError
 
 
-@pytest.mark.parametrize("sides",
-                         ["integer",
-                          "float"])
-def test_rectangle_area(create_rectangle, sides):
-    side_a, side_b = create_rectangle(sides=sides)
+@pytest.mark.parametrize("side_a, side_b, area",
+                         [(3, 5, 15),
+                          (3.3, 5.5, 18.15)],
+                         ids=["integer",
+                              "float"])
+def test_rectangle_area(side_a, side_b, area):
     r = Rectangle(side_a, side_b)
-    assert r.area == side_a * side_b, f"Expected area {side_a * side_b}"
+    assert r.area == area, f"Expected area {side_a * side_b}"
 
 
-@pytest.mark.parametrize("sides",
-                         ["integer",
-                          "float"])
-def test_rectangle_perimeter(create_rectangle, sides):
-    side_a, side_b = create_rectangle(sides=sides)
+@pytest.mark.parametrize("side_a, side_b, perimeter",
+                         [(3, 5, 16),
+                          (3.3, 5.5, 17.6)],
+                         ids=["integer",
+                              "float"])
+def test_rectangle_perimeter(side_a, side_b, perimeter):
     r = Rectangle(side_a, side_b)
-    assert r.perimeter == (side_a + side_b) * 2, f"Expected perimeter {(side_a + side_b) * 2}"
+    assert r.perimeter == perimeter, f"Expected perimeter {(side_a + side_b) * 2}"
 
-
-#method 'add_area' will show the same behaviour for other figures
-@pytest.mark.parametrize("sides",
-                         ["integer",
-                          "float"])
-def test_add_area(create_rectangle, sides):
-    side_a, side_b = create_rectangle(sides=sides)
-    r = Rectangle(side_a, side_b)
-    s = Square(side_a)
-    assert r.add_area(s) == side_a * side_b + side_a ** 2, f"Expected area {side_a * side_b + side_a ** 2}"

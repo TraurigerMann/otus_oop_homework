@@ -11,12 +11,15 @@ class Circle(Figure):
 
     @property
     def area(self):
-        return pi * (self.radius ** 2)
+        return round(pi * (self.radius ** 2), 5)
 
     @property
     def perimeter(self):
-        return 2 * pi * self.radius
+        return round(2 * pi * self.radius, 5)
 
 
-c = Circle(3)
-print(c.perimeter)
+c = Circle(5)
+print(c.area)
+
+
+
